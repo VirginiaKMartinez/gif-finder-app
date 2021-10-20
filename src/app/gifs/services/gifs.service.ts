@@ -1,6 +1,7 @@
 import { query } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SearchGifsResponse, Gif } from '../interface/gifs.interface';
 
 @Injectable({
   providedIn: 'root' //esto lo que hace es que nuestro servicio esté accesible de manera global en total la applicación y por eso no hay que importarlo en el app.module.
@@ -12,7 +13,7 @@ export class GifsService {
 
   private _historic: string[] = [];
 
-  public results: any[] = [];
+  public results: Gif[] = [];
 
   get historic() {
     return [...this._historic];
@@ -31,7 +32,7 @@ constructor(private http: HttpClient) {
       this._historic = this._historic.splice( 0,9 );
 
     }
-    this.http.get( `http://api.giphy.com/v1/gifs/search?api_key=k1RlFNP6leEDUbRF1ySW8fC3edqy08TY&q=${ query }&limit=10` )
+    this.http.get<SearchGifsResponse>( `http://api.giphy.com/v1/gifs/search?api_key=k1RlFNP6leEDUbRF1ySW8fC3edqy08TY&q=${ query }&limit=10` )
     .subscribe( ( resp: any ) => {
       console.log( resp.data );
       this.results = resp.data;
