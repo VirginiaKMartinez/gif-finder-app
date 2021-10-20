@@ -1,4 +1,5 @@
 import { query } from '@angular/animations';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,12 +8,20 @@ import { Injectable } from '@angular/core';
 })
 export class GifsService {
 
+  private _api: string = 'k1RlFNP6leEDUbRF1ySW8fC3edqy08TY';
+
   private _historic: string[] = [];
+
+  public results: any[] = [];
 
   get historic() {
     return [...this._historic];
   }
     
+constructor(private http: HttpClient) {
+
+}
+
   searchGifs( query: string = '' ) {
 
     query = query.trim().toLowerCase(); // para que ya escriban la misma busqueda en mayúsculas como minúsculas lo reconozca como duplicado. Lo que hace es eque el resultado de lo que ponen en el input lo pasa todo a minusculas.
@@ -22,7 +31,10 @@ export class GifsService {
       this._historic = this._historic.splice( 0,9 );
 
     }
-    console.log(this._historic);
-    
-  }
+    this.http.get( `http://api.giphy.com/v1/gifs/search?api_key=k1RlFNP6leEDUbRF1ySW8fC3edqy08TY&q=${ query }&limit=10` )
+    .subscribe( ( resp: any ) => {
+      console.log( resp.data );
+      this.results = resp.data;
+      
+    })};
 }

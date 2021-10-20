@@ -1,1 +1,25 @@
-<p>search-result works!</p>
+
+
+<div class="row">
+   <div 
+   *ngFor="let gif of results"
+   class="col-md-4 col-sm-6">
+        <div class="card">
+            <!-- Para que el valor que ponermos a src y alt no sean consiferados
+            un string sino el valor que viene de gif.blablabla lo tenemos que
+            poner entre los corchetes. -->
+            <img 
+            [src]="gif.images.downsized_large.url" 
+            [alt]="gif.title"
+            class="card-img-top"
+            >
+            <div class="card-body">
+                <p class="card-text">
+                    {{ gif.title }}
+                </p>
+
+            </div>
+
+        </div>
+   </div>
+</div>
