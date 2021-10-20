@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -11,10 +12,16 @@ export class GifsService {
   get historic() {
     return [...this._historic];
   }
+    
+  searchGifs( query: string = '' ) {
 
+    query = query.trim().toLowerCase(); // para que ya escriban la misma busqueda en mayúsculas como minúsculas lo reconozca como duplicado. Lo que hace es eque el resultado de lo que ponen en el input lo pasa todo a minusculas.
 
-  searchGifs( query: string ) {
-    this._historic.unshift( query );
+    if( !this._historic.includes( query ) ) {
+      this._historic.unshift( query );
+      this._historic = this._historic.splice( 0,9 );
+
+    }
     console.log(this._historic);
     
   }
