@@ -13,8 +13,15 @@ export class SearchComponent {
   @ViewChild('txtSearch') txtSearch!: ElementRef<HTMLInputElement>;
   search( ) {
 
-    const valor = this.txtSearch.nativeElement.value;
-    this.gifsService.searchGifs( valor );
+    const searchValue = this.txtSearch.nativeElement.value;
+    
+    //este if lo que previene es que no puedan dar al enter si el input está vacío, si
+    // no se escribió nada . El trim() quita los espacios vacíos de principio y final
+    if( searchValue.trim().length === 0 ) { 
+      return;
+    }
+
+    this.gifsService.searchGifs( searchValue );
     this.txtSearch.nativeElement.value = '';
 
   }
