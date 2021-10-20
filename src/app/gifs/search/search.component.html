@@ -1,2 +1,8 @@
     <h5>Search:</h5>
-    <input type="text" class="form-control" placeholder="Find gifs...">
+    <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Find gifs..."
+        (keyup.enter)="search(  )"
+        #txtSearch
+    >
