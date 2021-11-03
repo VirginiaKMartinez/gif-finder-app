@@ -41,7 +41,6 @@ constructor(private http: HttpClient) {
       this._historic.unshift( query );
       this._historic = this._historic.splice( 0,9 );
       localStorage.setItem( 'historic', JSON.stringify( this._historic ) ); //aquí lo que hacemos es coger todo el array de búsquedas y almacernarlas en el local Storage para que no se borren cuando la app se actualice o refresquemos el navegaro
-
     }
 
   const params = new HttpParams()
@@ -49,12 +48,8 @@ constructor(private http: HttpClient) {
         .set( 'limit', '10' )
         .set( 'q', query );
 
-        console.log( params.toString() );
-        
-
     this.http.get<SearchGifsResponse>( `${ this._api }/search`, { params } )
     .subscribe( ( resp: any ) => {
-      console.log( resp.data );
       this.results = resp.data;
       localStorage.setItem( 'results', JSON.stringify( this.results ) );
 
