@@ -8,6 +8,8 @@
       <a href="#"
       class="list-group-item list-group-item-action"
       *ngFor ="let item of historic;"
+      (click) = "search( item )"
+
       >
       <!-- El pipe | titlecase hace que aunque nosotros almacenamos en el array las busquedas
       en minúsculas, él se encarga de capitalizar las primeras letras de cada palabra

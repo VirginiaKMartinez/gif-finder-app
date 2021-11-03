@@ -12,9 +12,7 @@ export class SearchResultComponent {
     return this.gifsService.results;
 
   }
-  get historic() {
-    return this.gifsService.historic;
-  }
+  
 
 
   constructor( private gifsService: GifsService ) { }

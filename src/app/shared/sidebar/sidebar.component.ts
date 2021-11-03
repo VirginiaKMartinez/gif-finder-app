@@ -13,7 +13,9 @@ export class SidebarComponent {
     return this.gifsService.historic;
   }
 
-  constructor( private gifsService: GifsService) {
+  constructor( private gifsService: GifsService) {}
 
-  }
+    search( term: string ) {
+      this.gifsService.searchGifs( term );      
+    }
 }
